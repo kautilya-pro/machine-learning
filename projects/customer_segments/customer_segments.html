@@ -12119,7 +12119,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10813208&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x11172208&gt;</pre>
 </div>
 
 </div>
@@ -12376,7 +12376,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1f0dd048&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x11279358&gt;</pre>
 </div>
 
 </div>
@@ -12412,6 +12412,7 @@ div#notebook {
 <li>The <code>Detergents_Paper</code> category has the best visibly significant correlation with <code>Grocery</code>. Other than this, <code>Milk</code> and <code>Grocery</code> also possess a little correlation with each other.</li>
 <li>This confirms our suspicion about the relevance of our attempt to predict the <code>Grocery</code> feature.</li>
 <li>All two correlations as stated above are in a linear correlation with each other.</li>
+<li>The marginal distribution plots along diagonal of the scatter matrix shows that all features of the dataset are highly Right-Skewed. We must be aware that this can affect our clustering. So, we need to pre-process this data. Applying the natural logarithm solves purposes in most cases.</li>
 </ul>
 
 </div>
@@ -13865,7 +13866,7 @@ Name: Explained Variance, dtype: float64
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1c759908&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1dbb02e8&gt;</pre>
 </div>
 
 </div>
@@ -14231,7 +14232,7 @@ Name: Explained Variance, dtype: float64
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1bb317f0&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1d0d9438&gt;</pre>
 </div>
 
 </div>
@@ -14323,7 +14324,13 @@ This segment represents a very high demands in <code>Milk</code>(7924.0 vs 7190.
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
 As we can see, the first sample customer fits best into the second cluster. While the other two, second and third sample customers fits best into the first cluster.
-This outcome is actually in consistency with the predictions we made for the customer samples that -</p>
+We can also compare these samples with their respective cluster centers to test whether their features match or not,</p>
+<ul>
+<li>When we compare <code>'Sample 0'</code> with cluster center of <code>'Segment 1'</code>. We get nearly comparable feature pattern: Milk(12319 vs 7924.0), Grocery(11757 vs 12343.0), Frozen(287 vs 859.0), Detergents_Paper(3881 vs 4719.0), Delicatessen(2931 vs 983.0), Fresh(31714 vs 3473.0).</li>
+<li>While, <code>'Sample 1'</code>(Fresh:5567, Milk:871, Grocery:2010, Frozen:3383, Detergents_Paper:375, Delicatessen:569) &amp; <code>'Sample 2'</code>(Fresh:47493, Milk:2567, Grocery:3779, Frozen:5243, Detergents_Paper:828, Delicatessen:2253) shows pattern near to the <code>'Segment 0'</code>(Fresh:8848, Milk:2086, Grocery:2740, Frozen:2039, Detergents_Paper:351, Delicatessen:713).</li>
+</ul>
+<p>Though, <code>Fresh</code> tries to tell a different story here, we must not forget that according to biplot we plotted earlier, we'll be getting maximum definitive outcomes around the <code>Detergents_Paper</code>, <code>Milk</code>, and <code>Grocery</code> feature projections and least around <code>Fresh</code> and <code>Frozen</code>!</p>
+<p>This outcome is actually in consistency with the predictions we made for the customer samples that -</p>
 <ul>
 <li>Sample 0 is Retailer;</li>
 <li>Sample 1 is Cafe; and</li>
@@ -14368,6 +14375,7 @@ This outcome is actually in consistency with the predictions we made for the cus
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> Generally, <em>Household Supplies, Small Retailers or Refrigerated Store Owners</em> should be ones to accept the change positively as they don't have any business-critical dependencies over the supplies, also, they have some sort of storage options to collect and maintain stocks up to them. Plus, delivery of supplies on a less-frequent basis makes them focus more over to what matters to them the most i.e., their business. On the other hand, <em>Cafes, Fast-food Hubs, or Restaurants</em> wants to make supplies as fresh as they can, this adds to their quality of business. So they must be reluctant towards this change. So, this means that <strong>segment '0' will be reluctant towards this change, while segment '1' will react positively</strong>.</p>
+<p>For testing and verifying this hypothesis, we need to run A/B tests over a small set of our customer base. As we have 2 different clusters of customers we need to run the tests in two different phases, one for each customer segment. For each phase of tests we need to choose 5% customers (10-12 in numbers) randomly from either of the segments. Change the delivery plans for them only. If more than 50% customers out of all the customers under test reacts to the change positively then bingo! test was successful indeed! Try the same in the second phase for the other segment of customers. Then take feedbacks to test whether they reacted positively to the change or not! Now you are ready to make changes in your delivery service just for the right segment of customers.</p>
 
 </div>
 </div>
